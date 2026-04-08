@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "livephoto-best-frame-picker"
+version = "0.1.0"
+description = "Extract the best frame from iPhone Live Photos using computer vision"
+authors = ["Alex de Pablos <alex@alexdepablos.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+opencv-python = "^4.8.0"
+pathlib = "^1.0.1"
+piexif = "^1.1.3"
+hachoir = "^3.2.0"
+pillow = "^10.0.0"
+
+[tool.poetry.scripts]
+photo-date-fixer = "src.photo_date_fixer:main"
+photo-metadata-homogenizer = "src.photo_metadata_homogenizer:main"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.0.0"
+isort = "^5.12.0"
+pylint = "^2.17.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 

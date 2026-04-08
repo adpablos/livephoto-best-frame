@@ -1,10 +1,10 @@
 import cv2
-import os
 import logging
 from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass
 import argparse
+from .metadata_handler import MetadataHandler
 
 @dataclass
 class VideoConfig:
@@ -24,6 +24,7 @@ class FrameExtractor:
     def __init__(self, config: VideoConfig):
         self.config = config
         self._setup_logging()
+        self.metadata_handler = MetadataHandler()
     
     def _setup_logging(self) -> None:
         """Configure logging settings"""
@@ -90,12 +91,16 @@ class FrameExtractor:
             # Generamos la ruta de salida
             output_filename = self._generate_output_filename(video_path)
             cv2.imwrite(str(output_filename), best_frame)
+            
+            # Copiar metadatos usando el handler
+            self.metadata_handler.copy_metadata_to_image(video_path, output_filename)
+            
             self.logger.info(
                 f"Successfully saved best frame (index={best_frame_index}, sharpness={best_sharpness:.2f}) "
                 f"to: {output_filename}"
             )
             return True
-        
+            
         except Exception as e:
             self.logger.error(f"Error processing {video_path}: {str(e)}")
             return False

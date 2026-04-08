@@ -25,31 +25,61 @@ Instead of manually scrubbing through each video to find the perfect moment, thi
 - 💪 Robust error handling
 - 🖥️ Simple command-line interface
 
-## 🚀 Quick Start
+## 🚀 Installation & Setup
 
+### Using Poetry (Recommended)
 ```bash
-# Install requirements
-pip install opencv-python
+# Install Poetry if you haven't already
+curl -sSL https://install.python-poetry.org | python3 -
+
+# Clone the repository
+git clone https://github.com/yourusername/livephoto-best-frame-picker.git
+cd livephoto-best-frame-picker
+
+# Install dependencies
+poetry install
 
 # Run the script
-python frame_extractor.py /path/to/your/videos
+poetry run python -m src.frame_extractor /path/to/your/videos
+```
+
+### Using pip
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/livephoto-best-frame-picker.git
+cd livephoto-best-frame-picker
+
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On Unix or MacOS:
+source venv/bin/activate
+
+# Install requirements
+pip install opencv-python pathlib piexif
+
+# Run the script
+python -m src.frame_extractor /path/to/your/videos
 ```
 
 ## 💡 Usage Examples
 
 Basic usage (output to default folder):
 ```bash
-python frame_extractor.py /path/to/live/photos
+poetry run python -m src.frame_extractor /path/to/live/photos
 ```
 
 Specify output format:
 ```bash
-python frame_extractor.py /path/to/live/photos -f png
+poetry run python -m src.frame_extractor /path/to/live/photos -f png
 ```
 
 Custom output directory:
 ```bash
-python frame_extractor.py /path/to/live/photos -o /path/to/output
+poetry run python -m src.frame_extractor /path/to/live/photos -o /path/to/output
 ```
 
 ## 🛠️ How It Works
